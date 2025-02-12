@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,12 +23,48 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currentYear = new Date().getFullYear();
+
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100vh] w-full flex flex-col items-center`}
       >
-        {children}
+        <header className="w-full flex items-center p-6 bg-zinc-800">
+          <a href="/">
+            <h2 className="text-2xl font-bold">MedApp</h2>
+          </a>
+          <div className="grow"></div>
+          <ul className="flex gap-3">
+            <li>
+              <a
+                className="bg-zinc-700 py-2 px-4 rounded-full hover:bg-zinc-600 transition duration-[300ms]"
+                href="/"
+              >
+                Minhas consultas
+              </a>
+            </li>
+            <li>
+              <a
+                className="bg-zinc-700 py-2 px-4 rounded-full hover:bg-zinc-600 transition duration-[300ms]"
+                href="/new"
+              >
+                Nova consulta
+              </a>
+            </li>
+          </ul>
+        </header>
+        <main className="max-w-[1400px] grow p-6">{children}</main>
+        <footer className="w-full flex justify-center p-6 bg-zinc-800">
+          Lucas Rocha &copy; {currentYear}
+        </footer>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          closeOnClick
+          pauseOnHover
+          theme="colored"
+        />
       </body>
     </html>
   );
