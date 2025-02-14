@@ -1,0 +1,3 @@
+const BACKEND_BASE_DOMAIN = process.env.BACKEND_BASE_DOMAIN;
+
+export { BACKEND_BASE_DOMAIN };
